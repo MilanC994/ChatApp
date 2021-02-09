@@ -1,0 +1,28 @@
+{
+  "name": "serverPostgraphileSchema",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@graphile-contrib/pg-simplify-inflector": "^6.1.0",
+    "@graphile/pg-pubsub": "^4.11.0",
+    "body-parser": "^1.19.0",
+    "body-parser-graphql": "^1.1.0",
+    "concurrently": "^5.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "get-graphql-schema": "^2.1.2",
+    "graphql-request": "^2.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "nodemailer": "^6.4.10",
+    "postgraphile": "^4.7.0"
+  },
+  "devDependencies": {}
+}

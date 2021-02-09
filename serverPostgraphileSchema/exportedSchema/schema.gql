@@ -1,0 +1,2214 @@
+"""All input for the `authenticate` mutation."""
+input AuthenticateInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  email: String!
+  password: String!
+}
+
+"""The output of our `authenticate` mutation."""
+type AuthenticatePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  jwtToken: JwtToken
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `createEncryptedUser` mutation."""
+input CreateEncryptedUserInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  nameinp: String!
+  emailinp: String!
+  passwordinp: String!
+}
+
+"""The output of our `createEncryptedUser` mutation."""
+type CreateEncryptedUserPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  jwtToken: JwtToken
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `createInviteByEmail` mutation."""
+input CreateInviteByEmailInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  emailinp: String!
+  roomid: UUID!
+}
+
+"""The output of our `createInviteByEmail` mutation."""
+type CreateInviteByEmailPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  invite: Invite
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Room` that is related to this `Invite`."""
+  room: Room
+
+  """Reads a single `User` that is related to this `Invite`."""
+  user: User
+
+  """An edge for our `Invite`. May be used by Relay 1."""
+  inviteEdge(
+    """The method to use when ordering `Invite`."""
+    orderBy: [InvitesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): InvitesEdge
+}
+
+"""All input for the create `Invite` mutation."""
+input CreateInviteInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Invite` to be created by this mutation."""
+  invite: InviteInput!
+}
+
+"""The output of our create `Invite` mutation."""
+type CreateInvitePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Invite` that was created by this mutation."""
+  invite: Invite
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Room` that is related to this `Invite`."""
+  room: Room
+
+  """Reads a single `User` that is related to this `Invite`."""
+  user: User
+
+  """An edge for our `Invite`. May be used by Relay 1."""
+  inviteEdge(
+    """The method to use when ordering `Invite`."""
+    orderBy: [InvitesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): InvitesEdge
+}
+
+"""All input for the create `Message` mutation."""
+input CreateMessageInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Message` to be created by this mutation."""
+  message: MessageInput!
+}
+
+"""The output of our create `Message` mutation."""
+type CreateMessagePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Message` that was created by this mutation."""
+  message: Message
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Room` that is related to this `Message`."""
+  room: Room
+
+  """Reads a single `User` that is related to this `Message`."""
+  user: User
+
+  """An edge for our `Message`. May be used by Relay 1."""
+  messageEdge(
+    """The method to use when ordering `Message`."""
+    orderBy: [MessagesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): MessagesEdge
+}
+
+"""All input for the create `Room` mutation."""
+input CreateRoomInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Room` to be created by this mutation."""
+  room: RoomInput!
+}
+
+"""The output of our create `Room` mutation."""
+type CreateRoomPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Room` that was created by this mutation."""
+  room: Room
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `User` that is related to this `Room`."""
+  user: User
+
+  """An edge for our `Room`. May be used by Relay 1."""
+  roomEdge(
+    """The method to use when ordering `Room`."""
+    orderBy: [RoomsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RoomsEdge
+}
+
+"""All input for the create `User` mutation."""
+input CreateUserInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `User` to be created by this mutation."""
+  user: UserInput!
+}
+
+"""The output of our create `User` mutation."""
+type CreateUserPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `User` that was created by this mutation."""
+  user: User
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `User`. May be used by Relay 1."""
+  userEdge(
+    """The method to use when ordering `User`."""
+    orderBy: [UsersOrderBy!] = [PRIMARY_KEY_ASC]
+  ): UsersEdge
+}
+
+"""All input for the create `UsersInRoom` mutation."""
+input CreateUsersInRoomInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `UsersInRoom` to be created by this mutation."""
+  usersInRoom: UsersInRoomInput!
+}
+
+"""The output of our create `UsersInRoom` mutation."""
+type CreateUsersInRoomPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `UsersInRoom` that was created by this mutation."""
+  usersInRoom: UsersInRoom
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Room` that is related to this `UsersInRoom`."""
+  room: Room
+
+  """Reads a single `User` that is related to this `UsersInRoom`."""
+  user: User
+
+  """An edge for our `UsersInRoom`. May be used by Relay 1."""
+  usersInRoomEdge(
+    """The method to use when ordering `UsersInRoom`."""
+    orderBy: [UsersInRoomsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): UsersInRoomsEdge
+}
+
+"""A location in a connection that can be used for resuming pagination."""
+scalar Cursor
+
+"""
+A point in time as described by the [ISO
+8601](https://en.wikipedia.org/wiki/ISO_8601) standard. May or may not include a timezone.
+"""
+scalar Datetime
+
+"""All input for the `deleteInviteByNodeId` mutation."""
+input DeleteInviteByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Invite` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteInviteByRoomIdAndUserId` mutation."""
+input DeleteInviteByRoomIdAndUserIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  roomId: UUID!
+  userId: UUID!
+}
+
+"""All input for the `deleteInvite` mutation."""
+input DeleteInviteInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: UUID!
+}
+
+"""The output of our delete `Invite` mutation."""
+type DeleteInvitePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Invite` that was deleted by this mutation."""
+  invite: Invite
+  deletedInviteNodeId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Room` that is related to this `Invite`."""
+  room: Room
+
+  """Reads a single `User` that is related to this `Invite`."""
+  user: User
+
+  """An edge for our `Invite`. May be used by Relay 1."""
+  inviteEdge(
+    """The method to use when ordering `Invite`."""
+    orderBy: [InvitesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): InvitesEdge
+}
+
+"""All input for the `deleteMessageByNodeId` mutation."""
+input DeleteMessageByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Message` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteMessage` mutation."""
+input DeleteMessageInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: UUID!
+}
+
+"""The output of our delete `Message` mutation."""
+type DeleteMessagePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Message` that was deleted by this mutation."""
+  message: Message
+  deletedMessageNodeId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Room` that is related to this `Message`."""
+  room: Room
+
+  """Reads a single `User` that is related to this `Message`."""
+  user: User
+
+  """An edge for our `Message`. May be used by Relay 1."""
+  messageEdge(
+    """The method to use when ordering `Message`."""
+    orderBy: [MessagesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): MessagesEdge
+}
+
+"""All input for the `deleteRoomByNodeId` mutation."""
+input DeleteRoomByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Room` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteRoom` mutation."""
+input DeleteRoomInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: UUID!
+}
+
+"""The output of our delete `Room` mutation."""
+type DeleteRoomPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Room` that was deleted by this mutation."""
+  room: Room
+  deletedRoomNodeId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `User` that is related to this `Room`."""
+  user: User
+
+  """An edge for our `Room`. May be used by Relay 1."""
+  roomEdge(
+    """The method to use when ordering `Room`."""
+    orderBy: [RoomsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RoomsEdge
+}
+
+"""All input for the `deleteUserByNodeId` mutation."""
+input DeleteUserByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `User` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteUser` mutation."""
+input DeleteUserInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: UUID!
+}
+
+"""The output of our delete `User` mutation."""
+type DeleteUserPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `User` that was deleted by this mutation."""
+  user: User
+  deletedUserNodeId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `User`. May be used by Relay 1."""
+  userEdge(
+    """The method to use when ordering `User`."""
+    orderBy: [UsersOrderBy!] = [PRIMARY_KEY_ASC]
+  ): UsersEdge
+}
+
+"""All input for the `deleteUsersInRoomByNodeId` mutation."""
+input DeleteUsersInRoomByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `UsersInRoom` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteUsersInRoom` mutation."""
+input DeleteUsersInRoomInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: UUID!
+}
+
+"""The output of our delete `UsersInRoom` mutation."""
+type DeleteUsersInRoomPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `UsersInRoom` that was deleted by this mutation."""
+  usersInRoom: UsersInRoom
+  deletedUsersInRoomNodeId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Room` that is related to this `UsersInRoom`."""
+  room: Room
+
+  """Reads a single `User` that is related to this `UsersInRoom`."""
+  user: User
+
+  """An edge for our `UsersInRoom`. May be used by Relay 1."""
+  usersInRoomEdge(
+    """The method to use when ordering `UsersInRoom`."""
+    orderBy: [UsersInRoomsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): UsersInRoomsEdge
+}
+
+type Invite implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: UUID!
+  roomId: UUID
+  userId: UUID
+  accepted: Boolean!
+  createdAt: Datetime
+  expirationTime: Datetime
+  email: String
+
+  """Reads a single `Room` that is related to this `Invite`."""
+  room: Room
+
+  """Reads a single `User` that is related to this `Invite`."""
+  user: User
+}
+
+"""
+A condition to be used against `Invite` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input InviteCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: UUID
+
+  """Checks for equality with the object’s `roomId` field."""
+  roomId: UUID
+
+  """Checks for equality with the object’s `userId` field."""
+  userId: UUID
+
+  """Checks for equality with the object’s `accepted` field."""
+  accepted: Boolean
+
+  """Checks for equality with the object’s `createdAt` field."""
+  createdAt: Datetime
+
+  """Checks for equality with the object’s `expirationTime` field."""
+  expirationTime: Datetime
+
+  """Checks for equality with the object’s `email` field."""
+  email: String
+}
+
+"""An input for mutations affecting `Invite`"""
+input InviteInput {
+  id: UUID
+  roomId: UUID
+  userId: UUID
+  accepted: Boolean!
+  createdAt: Datetime
+  expirationTime: Datetime
+  email: String
+}
+
+"""
+Represents an update to a `Invite`. Fields that are set will be updated.
+"""
+input InvitePatch {
+  id: UUID
+  roomId: UUID
+  userId: UUID
+  accepted: Boolean
+  createdAt: Datetime
+  expirationTime: Datetime
+  email: String
+}
+
+"""A connection to a list of `Invite` values."""
+type InvitesConnection {
+  """A list of `Invite` objects."""
+  nodes: [Invite]!
+
+  """
+  A list of edges which contains the `Invite` and cursor to aid in pagination.
+  """
+  edges: [InvitesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Invite` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Invite` edge in the connection."""
+type InvitesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Invite` at the end of the edge."""
+  node: Invite
+}
+
+"""Methods to use when ordering `Invite`."""
+enum InvitesOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  ROOM_ID_ASC
+  ROOM_ID_DESC
+  USER_ID_ASC
+  USER_ID_DESC
+  ACCEPTED_ASC
+  ACCEPTED_DESC
+  CREATED_AT_ASC
+  CREATED_AT_DESC
+  EXPIRATION_TIME_ASC
+  EXPIRATION_TIME_DESC
+  EMAIL_ASC
+  EMAIL_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A JSON Web Token defined by [RFC 7519](https://tools.ietf.org/html/rfc7519)
+which securely represents claims between two parties.
+"""
+scalar JwtToken
+
+type ListenPayload {
+  """
+  Our root query field type. Allows us to run any query from our subscription payload.
+  """
+  query: Query
+  relatedNode: Node
+  relatedNodeId: ID
+}
+
+type Message implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: UUID!
+  roomId: UUID
+  userId: UUID
+  content: String!
+  sentAt: Datetime
+
+  """Reads a single `Room` that is related to this `Message`."""
+  room: Room
+
+  """Reads a single `User` that is related to this `Message`."""
+  user: User
+}
+
+"""
+A condition to be used against `Message` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input MessageCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: UUID
+
+  """Checks for equality with the object’s `roomId` field."""
+  roomId: UUID
+
+  """Checks for equality with the object’s `userId` field."""
+  userId: UUID
+
+  """Checks for equality with the object’s `content` field."""
+  content: String
+
+  """Checks for equality with the object’s `sentAt` field."""
+  sentAt: Datetime
+}
+
+"""An input for mutations affecting `Message`"""
+input MessageInput {
+  id: UUID
+  roomId: UUID
+  userId: UUID
+  content: String!
+  sentAt: Datetime
+}
+
+"""
+Represents an update to a `Message`. Fields that are set will be updated.
+"""
+input MessagePatch {
+  id: UUID
+  roomId: UUID
+  userId: UUID
+  content: String
+  sentAt: Datetime
+}
+
+"""A connection to a list of `Message` values."""
+type MessagesConnection {
+  """A list of `Message` objects."""
+  nodes: [Message]!
+
+  """
+  A list of edges which contains the `Message` and cursor to aid in pagination.
+  """
+  edges: [MessagesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Message` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Message` edge in the connection."""
+type MessagesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Message` at the end of the edge."""
+  node: Message
+}
+
+"""Methods to use when ordering `Message`."""
+enum MessagesOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  ROOM_ID_ASC
+  ROOM_ID_DESC
+  USER_ID_ASC
+  USER_ID_DESC
+  CONTENT_ASC
+  CONTENT_DESC
+  SENT_AT_ASC
+  SENT_AT_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+input MessageSubscriptionInput {
+  room_id: UUID
+}
+
+type MessageSubscriptionPayload {
+  message: Message!
+  event: String
+}
+
+"""
+The root mutation type which contains root level fields which mutate data.
+"""
+type Mutation {
+  """Creates a single `Invite`."""
+  createInvite(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateInviteInput!
+  ): CreateInvitePayload
+
+  """Creates a single `Message`."""
+  createMessage(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateMessageInput!
+  ): CreateMessagePayload
+
+  """Creates a single `Room`."""
+  createRoom(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateRoomInput!
+  ): CreateRoomPayload
+
+  """Creates a single `User`."""
+  createUser(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateUserInput!
+  ): CreateUserPayload
+
+  """Creates a single `UsersInRoom`."""
+  createUsersInRoom(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateUsersInRoomInput!
+  ): CreateUsersInRoomPayload
+
+  """Updates a single `Invite` using its globally unique id and a patch."""
+  updateInviteByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateInviteByNodeIdInput!
+  ): UpdateInvitePayload
+
+  """Updates a single `Invite` using a unique key and a patch."""
+  updateInvite(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateInviteInput!
+  ): UpdateInvitePayload
+
+  """Updates a single `Invite` using a unique key and a patch."""
+  updateInviteByRoomIdAndUserId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateInviteByRoomIdAndUserIdInput!
+  ): UpdateInvitePayload
+
+  """Updates a single `Message` using its globally unique id and a patch."""
+  updateMessageByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateMessageByNodeIdInput!
+  ): UpdateMessagePayload
+
+  """Updates a single `Message` using a unique key and a patch."""
+  updateMessage(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateMessageInput!
+  ): UpdateMessagePayload
+
+  """Updates a single `Room` using its globally unique id and a patch."""
+  updateRoomByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateRoomByNodeIdInput!
+  ): UpdateRoomPayload
+
+  """Updates a single `Room` using a unique key and a patch."""
+  updateRoom(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateRoomInput!
+  ): UpdateRoomPayload
+
+  """Updates a single `User` using its globally unique id and a patch."""
+  updateUserByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateUserByNodeIdInput!
+  ): UpdateUserPayload
+
+  """Updates a single `User` using a unique key and a patch."""
+  updateUser(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateUserInput!
+  ): UpdateUserPayload
+
+  """
+  Updates a single `UsersInRoom` using its globally unique id and a patch.
+  """
+  updateUsersInRoomByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateUsersInRoomByNodeIdInput!
+  ): UpdateUsersInRoomPayload
+
+  """Updates a single `UsersInRoom` using a unique key and a patch."""
+  updateUsersInRoom(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateUsersInRoomInput!
+  ): UpdateUsersInRoomPayload
+
+  """Deletes a single `Invite` using its globally unique id."""
+  deleteInviteByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteInviteByNodeIdInput!
+  ): DeleteInvitePayload
+
+  """Deletes a single `Invite` using a unique key."""
+  deleteInvite(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteInviteInput!
+  ): DeleteInvitePayload
+
+  """Deletes a single `Invite` using a unique key."""
+  deleteInviteByRoomIdAndUserId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteInviteByRoomIdAndUserIdInput!
+  ): DeleteInvitePayload
+
+  """Deletes a single `Message` using its globally unique id."""
+  deleteMessageByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteMessageByNodeIdInput!
+  ): DeleteMessagePayload
+
+  """Deletes a single `Message` using a unique key."""
+  deleteMessage(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteMessageInput!
+  ): DeleteMessagePayload
+
+  """Deletes a single `Room` using its globally unique id."""
+  deleteRoomByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteRoomByNodeIdInput!
+  ): DeleteRoomPayload
+
+  """Deletes a single `Room` using a unique key."""
+  deleteRoom(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteRoomInput!
+  ): DeleteRoomPayload
+
+  """Deletes a single `User` using its globally unique id."""
+  deleteUserByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteUserByNodeIdInput!
+  ): DeleteUserPayload
+
+  """Deletes a single `User` using a unique key."""
+  deleteUser(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteUserInput!
+  ): DeleteUserPayload
+
+  """Deletes a single `UsersInRoom` using its globally unique id."""
+  deleteUsersInRoomByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteUsersInRoomByNodeIdInput!
+  ): DeleteUsersInRoomPayload
+
+  """Deletes a single `UsersInRoom` using a unique key."""
+  deleteUsersInRoom(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteUsersInRoomInput!
+  ): DeleteUsersInRoomPayload
+  authenticate(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: AuthenticateInput!
+  ): AuthenticatePayload
+  createEncryptedUser(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateEncryptedUserInput!
+  ): CreateEncryptedUserPayload
+  createInviteByEmail(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateInviteByEmailInput!
+  ): CreateInviteByEmailPayload
+  updateNewUserOnInviteAccept(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateNewUserOnInviteAcceptInput!
+  ): UpdateNewUserOnInviteAcceptPayload
+  updateUserInfo(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateUserInfoInput!
+  ): UpdateUserInfoPayload
+}
+
+"""An object with a globally unique `ID`."""
+interface Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: Cursor
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: Cursor
+}
+
+"""The root query type which gives access points into the data universe."""
+type Query implements Node {
+  """
+  Exposes the root query type nested one level down. This is helpful for Relay 1
+  which can only query top level fields if they are in a particular form.
+  """
+  query: Query!
+
+  """
+  The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`.
+  """
+  nodeId: ID!
+
+  """Fetches an object given its globally unique `ID`."""
+  node(
+    """The globally unique `ID`."""
+    nodeId: ID!
+  ): Node
+
+  """Reads and enables pagination through a set of `Invite`."""
+  invites(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Invite`."""
+    orderBy: [InvitesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: InviteCondition
+  ): InvitesConnection
+
+  """Reads and enables pagination through a set of `Message`."""
+  messages(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Message`."""
+    orderBy: [MessagesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: MessageCondition
+  ): MessagesConnection
+
+  """Reads and enables pagination through a set of `Room`."""
+  rooms(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Room`."""
+    orderBy: [RoomsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: RoomCondition
+  ): RoomsConnection
+
+  """Reads and enables pagination through a set of `User`."""
+  users(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `User`."""
+    orderBy: [UsersOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: UserCondition
+  ): UsersConnection
+
+  """Reads and enables pagination through a set of `UsersInRoom`."""
+  usersInRooms(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `UsersInRoom`."""
+    orderBy: [UsersInRoomsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: UsersInRoomCondition
+  ): UsersInRoomsConnection
+  invite(id: UUID!): Invite
+  inviteByRoomIdAndUserId(roomId: UUID!, userId: UUID!): Invite
+  message(id: UUID!): Message
+  room(id: UUID!): Room
+  user(id: UUID!): User
+  usersInRoom(id: UUID!): UsersInRoom
+
+  """Returns the profile of the currently logged-in account."""
+  currentProfile: User
+
+  """Reads a single `Invite` using its globally unique `ID`."""
+  inviteByNodeId(
+    """The globally unique `ID` to be used in selecting a single `Invite`."""
+    nodeId: ID!
+  ): Invite
+
+  """Reads a single `Message` using its globally unique `ID`."""
+  messageByNodeId(
+    """The globally unique `ID` to be used in selecting a single `Message`."""
+    nodeId: ID!
+  ): Message
+
+  """Reads a single `Room` using its globally unique `ID`."""
+  roomByNodeId(
+    """The globally unique `ID` to be used in selecting a single `Room`."""
+    nodeId: ID!
+  ): Room
+
+  """Reads a single `User` using its globally unique `ID`."""
+  userByNodeId(
+    """The globally unique `ID` to be used in selecting a single `User`."""
+    nodeId: ID!
+  ): User
+
+  """Reads a single `UsersInRoom` using its globally unique `ID`."""
+  usersInRoomByNodeId(
+    """
+    The globally unique `ID` to be used in selecting a single `UsersInRoom`.
+    """
+    nodeId: ID!
+  ): UsersInRoom
+}
+
+type Room implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: UUID!
+  name: String!
+  userId: UUID
+  createdAt: Datetime
+  public: Boolean!
+
+  """Reads a single `User` that is related to this `Room`."""
+  user: User
+
+  """Reads and enables pagination through a set of `UsersInRoom`."""
+  usersInRooms(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `UsersInRoom`."""
+    orderBy: [UsersInRoomsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: UsersInRoomCondition
+  ): UsersInRoomsConnection!
+
+  """Reads and enables pagination through a set of `Invite`."""
+  invites(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Invite`."""
+    orderBy: [InvitesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: InviteCondition
+  ): InvitesConnection!
+
+  """Reads and enables pagination through a set of `Message`."""
+  messages(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Message`."""
+    orderBy: [MessagesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: MessageCondition
+  ): MessagesConnection!
+}
+
+"""
+A condition to be used against `Room` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input RoomCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: UUID
+
+  """Checks for equality with the object’s `name` field."""
+  name: String
+
+  """Checks for equality with the object’s `userId` field."""
+  userId: UUID
+
+  """Checks for equality with the object’s `createdAt` field."""
+  createdAt: Datetime
+
+  """Checks for equality with the object’s `public` field."""
+  public: Boolean
+}
+
+"""An input for mutations affecting `Room`"""
+input RoomInput {
+  id: UUID
+  name: String!
+  userId: UUID
+  createdAt: Datetime
+  public: Boolean
+}
+
+"""Represents an update to a `Room`. Fields that are set will be updated."""
+input RoomPatch {
+  id: UUID
+  name: String
+  userId: UUID
+  createdAt: Datetime
+  public: Boolean
+}
+
+"""A connection to a list of `Room` values."""
+type RoomsConnection {
+  """A list of `Room` objects."""
+  nodes: [Room]!
+
+  """
+  A list of edges which contains the `Room` and cursor to aid in pagination.
+  """
+  edges: [RoomsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Room` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Room` edge in the connection."""
+type RoomsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Room` at the end of the edge."""
+  node: Room
+}
+
+"""Methods to use when ordering `Room`."""
+enum RoomsOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  NAME_ASC
+  NAME_DESC
+  USER_ID_ASC
+  USER_ID_DESC
+  CREATED_AT_ASC
+  CREATED_AT_DESC
+  PUBLIC_ASC
+  PUBLIC_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+The root subscription type: contains realtime events you can subscribe to with the `subscription` operation.
+"""
+type Subscription {
+  """
+  Triggered when the current user's data changes:
+  
+  - direct modifications to the user
+  - when their organization membership changes
+  """
+  messagesUpdated(input: MessageSubscriptionInput): MessageSubscriptionPayload
+  listen(topic: String!): ListenPayload!
+}
+
+"""All input for the `updateInviteByNodeId` mutation."""
+input UpdateInviteByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Invite` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Invite` being updated.
+  """
+  patch: InvitePatch!
+}
+
+"""All input for the `updateInviteByRoomIdAndUserId` mutation."""
+input UpdateInviteByRoomIdAndUserIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Invite` being updated.
+  """
+  patch: InvitePatch!
+  roomId: UUID!
+  userId: UUID!
+}
+
+"""All input for the `updateInvite` mutation."""
+input UpdateInviteInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Invite` being updated.
+  """
+  patch: InvitePatch!
+  id: UUID!
+}
+
+"""The output of our update `Invite` mutation."""
+type UpdateInvitePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Invite` that was updated by this mutation."""
+  invite: Invite
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Room` that is related to this `Invite`."""
+  room: Room
+
+  """Reads a single `User` that is related to this `Invite`."""
+  user: User
+
+  """An edge for our `Invite`. May be used by Relay 1."""
+  inviteEdge(
+    """The method to use when ordering `Invite`."""
+    orderBy: [InvitesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): InvitesEdge
+}
+
+"""All input for the `updateMessageByNodeId` mutation."""
+input UpdateMessageByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Message` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Message` being updated.
+  """
+  patch: MessagePatch!
+}
+
+"""All input for the `updateMessage` mutation."""
+input UpdateMessageInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Message` being updated.
+  """
+  patch: MessagePatch!
+  id: UUID!
+}
+
+"""The output of our update `Message` mutation."""
+type UpdateMessagePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Message` that was updated by this mutation."""
+  message: Message
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Room` that is related to this `Message`."""
+  room: Room
+
+  """Reads a single `User` that is related to this `Message`."""
+  user: User
+
+  """An edge for our `Message`. May be used by Relay 1."""
+  messageEdge(
+    """The method to use when ordering `Message`."""
+    orderBy: [MessagesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): MessagesEdge
+}
+
+"""All input for the `updateNewUserOnInviteAccept` mutation."""
+input UpdateNewUserOnInviteAcceptInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  userId: UUID!
+  newName: String!
+  newPassword: String!
+}
+
+"""The output of our `updateNewUserOnInviteAccept` mutation."""
+type UpdateNewUserOnInviteAcceptPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  user: User
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `User`. May be used by Relay 1."""
+  userEdge(
+    """The method to use when ordering `User`."""
+    orderBy: [UsersOrderBy!] = [PRIMARY_KEY_ASC]
+  ): UsersEdge
+}
+
+"""All input for the `updateRoomByNodeId` mutation."""
+input UpdateRoomByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Room` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Room` being updated.
+  """
+  patch: RoomPatch!
+}
+
+"""All input for the `updateRoom` mutation."""
+input UpdateRoomInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Room` being updated.
+  """
+  patch: RoomPatch!
+  id: UUID!
+}
+
+"""The output of our update `Room` mutation."""
+type UpdateRoomPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Room` that was updated by this mutation."""
+  room: Room
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `User` that is related to this `Room`."""
+  user: User
+
+  """An edge for our `Room`. May be used by Relay 1."""
+  roomEdge(
+    """The method to use when ordering `Room`."""
+    orderBy: [RoomsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RoomsEdge
+}
+
+"""All input for the `updateUserByNodeId` mutation."""
+input UpdateUserByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `User` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `User` being updated.
+  """
+  patch: UserPatch!
+}
+
+"""All input for the `updateUserInfo` mutation."""
+input UpdateUserInfoInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  _userId: UUID
+  currentPassword: String
+  newName: String
+  newEmail: String
+  newPassword: String
+}
+
+"""The output of our `updateUserInfo` mutation."""
+type UpdateUserInfoPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  user: User
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `User`. May be used by Relay 1."""
+  userEdge(
+    """The method to use when ordering `User`."""
+    orderBy: [UsersOrderBy!] = [PRIMARY_KEY_ASC]
+  ): UsersEdge
+}
+
+"""All input for the `updateUser` mutation."""
+input UpdateUserInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `User` being updated.
+  """
+  patch: UserPatch!
+  id: UUID!
+}
+
+"""The output of our update `User` mutation."""
+type UpdateUserPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `User` that was updated by this mutation."""
+  user: User
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `User`. May be used by Relay 1."""
+  userEdge(
+    """The method to use when ordering `User`."""
+    orderBy: [UsersOrderBy!] = [PRIMARY_KEY_ASC]
+  ): UsersEdge
+}
+
+"""All input for the `updateUsersInRoomByNodeId` mutation."""
+input UpdateUsersInRoomByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `UsersInRoom` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `UsersInRoom` being updated.
+  """
+  patch: UsersInRoomPatch!
+}
+
+"""All input for the `updateUsersInRoom` mutation."""
+input UpdateUsersInRoomInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `UsersInRoom` being updated.
+  """
+  patch: UsersInRoomPatch!
+  id: UUID!
+}
+
+"""The output of our update `UsersInRoom` mutation."""
+type UpdateUsersInRoomPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `UsersInRoom` that was updated by this mutation."""
+  usersInRoom: UsersInRoom
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Room` that is related to this `UsersInRoom`."""
+  room: Room
+
+  """Reads a single `User` that is related to this `UsersInRoom`."""
+  user: User
+
+  """An edge for our `UsersInRoom`. May be used by Relay 1."""
+  usersInRoomEdge(
+    """The method to use when ordering `UsersInRoom`."""
+    orderBy: [UsersInRoomsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): UsersInRoomsEdge
+}
+
+type User implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: UUID!
+  name: String!
+  email: String!
+  password: String!
+  createdAt: Datetime
+
+  """Reads and enables pagination through a set of `Room`."""
+  rooms(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Room`."""
+    orderBy: [RoomsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: RoomCondition
+  ): RoomsConnection!
+
+  """Reads and enables pagination through a set of `UsersInRoom`."""
+  usersInRooms(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `UsersInRoom`."""
+    orderBy: [UsersInRoomsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: UsersInRoomCondition
+  ): UsersInRoomsConnection!
+
+  """Reads and enables pagination through a set of `Invite`."""
+  invites(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Invite`."""
+    orderBy: [InvitesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: InviteCondition
+  ): InvitesConnection!
+
+  """Reads and enables pagination through a set of `Message`."""
+  messages(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Message`."""
+    orderBy: [MessagesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: MessageCondition
+  ): MessagesConnection!
+
+  """Reads and enables pagination through a set of `Room`."""
+  allRooms(
+    _admin: Boolean
+    _joined: Boolean
+    _public: Boolean
+    _invite: Boolean
+    _publicOnly: Boolean
+    _searchTerm: String
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+  ): RoomsConnection!
+}
+
+"""
+A condition to be used against `User` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input UserCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: UUID
+
+  """Checks for equality with the object’s `name` field."""
+  name: String
+
+  """Checks for equality with the object’s `email` field."""
+  email: String
+
+  """Checks for equality with the object’s `password` field."""
+  password: String
+
+  """Checks for equality with the object’s `createdAt` field."""
+  createdAt: Datetime
+}
+
+"""An input for mutations affecting `User`"""
+input UserInput {
+  id: UUID
+  name: String!
+  email: String!
+  password: String!
+  createdAt: Datetime
+}
+
+"""Represents an update to a `User`. Fields that are set will be updated."""
+input UserPatch {
+  id: UUID
+  name: String
+  email: String
+  password: String
+  createdAt: Datetime
+}
+
+"""A connection to a list of `User` values."""
+type UsersConnection {
+  """A list of `User` objects."""
+  nodes: [User]!
+
+  """
+  A list of edges which contains the `User` and cursor to aid in pagination.
+  """
+  edges: [UsersEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `User` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `User` edge in the connection."""
+type UsersEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `User` at the end of the edge."""
+  node: User
+}
+
+type UsersInRoom implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: UUID!
+  roomId: UUID
+  userId: UUID
+  dateJoined: Datetime
+
+  """Reads a single `Room` that is related to this `UsersInRoom`."""
+  room: Room
+
+  """Reads a single `User` that is related to this `UsersInRoom`."""
+  user: User
+}
+
+"""
+A condition to be used against `UsersInRoom` object types. All fields are tested
+for equality and combined with a logical ‘and.’
+"""
+input UsersInRoomCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: UUID
+
+  """Checks for equality with the object’s `roomId` field."""
+  roomId: UUID
+
+  """Checks for equality with the object’s `userId` field."""
+  userId: UUID
+
+  """Checks for equality with the object’s `dateJoined` field."""
+  dateJoined: Datetime
+}
+
+"""An input for mutations affecting `UsersInRoom`"""
+input UsersInRoomInput {
+  id: UUID
+  roomId: UUID
+  userId: UUID
+  dateJoined: Datetime
+}
+
+"""
+Represents an update to a `UsersInRoom`. Fields that are set will be updated.
+"""
+input UsersInRoomPatch {
+  id: UUID
+  roomId: UUID
+  userId: UUID
+  dateJoined: Datetime
+}
+
+"""A connection to a list of `UsersInRoom` values."""
+type UsersInRoomsConnection {
+  """A list of `UsersInRoom` objects."""
+  nodes: [UsersInRoom]!
+
+  """
+  A list of edges which contains the `UsersInRoom` and cursor to aid in pagination.
+  """
+  edges: [UsersInRoomsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `UsersInRoom` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `UsersInRoom` edge in the connection."""
+type UsersInRoomsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `UsersInRoom` at the end of the edge."""
+  node: UsersInRoom
+}
+
+"""Methods to use when ordering `UsersInRoom`."""
+enum UsersInRoomsOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  ROOM_ID_ASC
+  ROOM_ID_DESC
+  USER_ID_ASC
+  USER_ID_DESC
+  DATE_JOINED_ASC
+  DATE_JOINED_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""Methods to use when ordering `User`."""
+enum UsersOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  NAME_ASC
+  NAME_DESC
+  EMAIL_ASC
+  EMAIL_DESC
+  PASSWORD_ASC
+  PASSWORD_DESC
+  CREATED_AT_ASC
+  CREATED_AT_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A universally unique identifier as defined by [RFC 4122](https://tools.ietf.org/html/rfc4122).
+"""
+scalar UUID

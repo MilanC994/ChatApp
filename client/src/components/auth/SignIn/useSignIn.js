@@ -1,0 +1,43 @@
+import { useState, useEffect, useCallback } from 'react'
+import SignUserIn from '../../mutations/SignUserIn'
+import { emailValidation, passwordValidation } from '../../../utils/credentialsValidation'
+import useInputField from '../../../hooks/useInputField'
+import validateForm from '../../../utils/validateForm'
+
+
+const useSignIn = () => {
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+        setSignedIn(true)
+        }
+    },[])
+
+
+    const [signedIn, setSignedIn] = useState(false)
+    const [error, setError] = useState(false)
+
+    const { input: emailField, data: email } = useInputField('email','', emailValidation)
+    const { input: passwordField, data: password} = useInputField('password','', passwordValidation)
+
+    const handleSubmit = useCallback(async () => {
+        if(!validateForm([email, password])) return
+        SignUserIn(
+            emailField.value,
+            passwordField.value,
+            async (token, error) => {
+                if (error) {
+                    setError(error)
+                } else {
+                    await localStorage.setItem('token', token)
+                    setError(null)
+                    setSignedIn(true)
+
+                }
+            }
+        )
+    },[emailField, passwordField])
+
+    return { emailField, passwordField, handleSubmit, error, signedIn }
+}
+
+export default useSignIn

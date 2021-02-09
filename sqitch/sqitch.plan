@@ -1,0 +1,28 @@
+%syntax-version=1.0.0
+%project=chatapp
+
+appschema 2020-05-21T15:34:43Z postgres <postgres@test.com> # Add schema for all app  objects.
+uuid_extension 2021-01-26T14:24:10Z Milan <xXx@DESKTOP-6PVQJSG> # add uuid extension
+table_users [appschema] 2020-05-21T15:47:41Z postgres <postgres@test.com> # Creates table to track our users.
+table_room [table_users] 2020-05-22T08:32:41Z postgres <postgres@test.com> # Creates table to track our rooms.
+table_users_in_rooms [table_users table_room] 2020-05-22T08:54:35Z postgres <postgres@test.com> # Creates table to keep track of users and rooms.
+table_invite [table_users table_room] 2020-05-22T09:15:29Z postgres <postgres@test.com> # Creates table to keep track of invites.
+table_message [table_users table_room] 2020-05-22T09:28:44Z postgres <postgres@test.com> # Creates table to keep track of messages.
+trigger_accept_invite [table_invite table_users table_room] 2020-05-22T13:47:15Z postgres <postgres@test.com> # accepted invite trigger.
+trigger_delete_user [appschema table_users table_users_in_rooms] 2020-05-28T09:26:31Z postgres <postgres@test.com> # Creates triger to firstly delete from users in rooms when user is deleted.
+trigger_delete_room [appschema table_room table_invite table_message table_users_in_rooms] 2020-05-28T09:50:36Z postgres <postgres@test.com> # Creates triger to firstly delete from users in rooms and messages and invites when room is deleted.
+type_jwt_token [appschema table_users] 2020-06-04T09:50:14Z postgres <postgres@test.com> # Creates JWT Token Type for Authentification.
+pg_crypto_extension [appschema] 2020-06-04T10:29:44Z postgres <postgres@test.com> # Creates pg crypto extension for crypting passwords
+function_authenticate_user [appschema table_users type_jwt_token] 2020-06-04T10:38:16Z postgres <postgres@test.com> # Authenticate user function
+function_create_encrypted_user [appschema table_users] 2020-06-04T12:25:50Z postgres <postgres@test.com> # Insert User with passwordEncryption
+function_current_profile [appschema table_users type_jwt_token] 2020-06-04T13:57:18Z postgres <postgres@test.com> # Get current user profile from jwt
+roomOrderBy [appschema] 2020-06-10T10:26:23Z postgres <postgres@test.com> # Enum type for order by clause.
+function_create_invite_by_email [appschema table_users table_room table_invite] 2020-06-17T14:30:59Z postgres <postgres@test.com> # Create User if not exists on invite send.
+function_check_if_user_is_in_room_before_invite [appschema table_room table_users_in_rooms table_users] 2020-06-25T14:43:23Z postgres <postgres@test.com> # Before insert in invite, check if user is already in the room.
+function_update_user_info [appschema table_users] 2020-06-26T14:55:24Z postgres <postgres@test.com> # Update user info
+function_update_new_user_on_accept_invite [appschema table_users table_invite] 2020-07-01T13:54:14Z postgres <postgres@test.com> # Update new user on Invite accept
+function_all_rooms [appschema table_users table_room] 2020-07-02T09:51:31Z postgres <postgres@test.com> # Get user public rooms
+check_if_user_can_send_messsage_trigger [appschema table_users table_room] 2020-07-02T12:00:27Z postgres <postgres@test.com> # Check if user can send message trigger
+graphql_message_subscriptions 2021-02-04T14:11:40Z Milan <xXx@DESKTOP-6PVQJSG> # subscriptions function
+trigger_message_created 2021-02-04T13:32:14Z Milan <xXx@DESKTOP-6PVQJSG> # add trigger for subscription purposes
+

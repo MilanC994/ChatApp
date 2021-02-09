@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignIn Component test renders correctly 1`] = `
+<SignIn
+  classes={
+    Object {
+      "avatar": "SignIn-avatar-2",
+      "form": "SignIn-form-3",
+      "paper": "SignIn-paper-1",
+    }
+  }
+/>
+`;
