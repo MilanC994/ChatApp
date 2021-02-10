@@ -14,14 +14,15 @@ import graphql from 'babel-plugin-relay/macro'
     }
   `
   
-  export default (email, password, callback) => {
+  export default (email, password, inviteId, callback) => {
     const variables = {
       input:{
       email,
-      password
+      password,
+      _inviteId: inviteId || null
       }
     }
-  
+    console.log("SIGN IN VARIABLES, ", variables)
     commitMutation(
       environment,
       {

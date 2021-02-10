@@ -27,6 +27,7 @@ const AllRoomsContainer = props => {
   const [fiterOpen, setFilterOpen] = useState(false)
   const [roomsFilter, setRoomsFilter] = useState({ admin: true, invites: true, joined: true, publicOnly:true, publicRooms: undefined})
   const [searchTerm, setSearchTerm] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const debouncedSetSearchTerm =useCallback( debounce( term  => {
     setSearchTerm(term) 
@@ -77,13 +78,12 @@ const AllRoomsContainer = props => {
   )
 
   const onLoadMore = () => {
-    // const { loading } = this.state;
-    // if (loading) return;
+    if (loading) return;
 
     const { allRooms } = props.allRooms;  
     if (!allRooms || !allRooms.pageInfo.hasNextPage) return;
    
-    //this.setState({ loading: true });
+    setLoading(true)
     const { endCursor } = allRooms.pageInfo;
     
     // Fetch 5 more comments
@@ -99,8 +99,8 @@ const AllRoomsContainer = props => {
      refetchVariables,
      renderVariables, 
      () => {
-       console.log("loadMore DONE")
-      //this.setState({ loading: false });
+        console.log("loadMore DONE")
+        setLoading(false)
      }, {
       force: true,
      },
@@ -195,7 +195,7 @@ const AllRoomsContainer = props => {
   return (
     <>
       {roomFilters()}
-      <Box>
+      <Box style={{minHeight:'75vh'}}>
         <Box
           display='flex'
           flexWrap='wrap'

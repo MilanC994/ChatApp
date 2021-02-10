@@ -1,6 +1,6 @@
 
 
-const AcceptInviteStyle = (theme) => ({
+const AnswerInviteStyle = (theme) => ({
     paper: {
       marginTop: theme.spacing(8),
       display: 'flex',
@@ -31,4 +31,4 @@ const AcceptInviteStyle = (theme) => ({
     },
   })
   
-  export default AcceptInviteStyle
+  export default AnswerInviteStyle

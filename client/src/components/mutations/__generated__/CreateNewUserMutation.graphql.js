@@ -10,9 +10,10 @@
 import type { ConcreteRequest } from 'relay-runtime';
 export type CreateEncryptedUserInput = {|
   clientMutationId?: ?string,
-  nameinp: string,
-  emailinp: string,
-  passwordinp: string,
+  _name?: ?string,
+  _email?: ?string,
+  _password?: ?string,
+  _inviteId?: ?any,
 |};
 export type CreateNewUserMutationVariables = {|
   input: CreateEncryptedUserInput

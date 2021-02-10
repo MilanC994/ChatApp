@@ -2,6 +2,6 @@
 
 BEGIN;
 
--- XXX Add DDLs here.
+drop function if exists chatapp.graphql_subscription;
 
 COMMIT;

@@ -5,7 +5,7 @@ import useInputField from '../../../hooks/useInputField'
 import validateForm from '../../../utils/validateForm'
 
 
-const useSignIn = () => {
+const useSignIn = ({ inviteId, inviteEmail }) => {
     useEffect(() => {
         if (localStorage.getItem('token')) {
         setSignedIn(true)
@@ -16,14 +16,18 @@ const useSignIn = () => {
     const [signedIn, setSignedIn] = useState(false)
     const [error, setError] = useState(false)
 
-    const { input: emailField, data: email } = useInputField('email','', emailValidation)
+    const emailValue = inviteEmail ? inviteEmail : ''
+
+    const { input: emailField, data: email } = useInputField('email', emailValue, emailValidation)
     const { input: passwordField, data: password} = useInputField('password','', passwordValidation)
 
     const handleSubmit = useCallback(async () => {
-        if(!validateForm([email, password])) return
+        console.log("HANDLE SUBMIT")
+        if(!validateForm([email, password])){ console.log("validation res   je false"); return}
         SignUserIn(
             emailField.value,
             passwordField.value,
+            inviteId,
             async (token, error) => {
                 if (error) {
                     setError(error)
@@ -35,7 +39,7 @@ const useSignIn = () => {
                 }
             }
         )
-    },[emailField, passwordField])
+    },[emailField, passwordField, inviteId])
 
     return { emailField, passwordField, handleSubmit, error, signedIn }
 }

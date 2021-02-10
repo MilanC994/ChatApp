@@ -1,3 +1,27 @@
+"""All input for the `acceptInvite` mutation."""
+input AcceptInviteInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  _inviteId: UUID
+}
+
+"""The output of our `acceptInvite` mutation."""
+type AcceptInvitePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
 """All input for the `authenticate` mutation."""
 input AuthenticateInput {
   """
@@ -5,8 +29,9 @@ input AuthenticateInput {
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
-  email: String!
-  password: String!
+  email: String
+  password: String
+  _inviteId: UUID
 }
 
 """The output of our `authenticate` mutation."""
@@ -31,9 +56,10 @@ input CreateEncryptedUserInput {
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
-  nameinp: String!
-  emailinp: String!
-  passwordinp: String!
+  _name: String
+  _email: String
+  _password: String
+  _inviteId: UUID
 }
 
 """The output of our `createEncryptedUser` mutation."""
@@ -1029,6 +1055,12 @@ type Mutation {
     """
     input: DeleteUsersInRoomInput!
   ): DeleteUsersInRoomPayload
+  acceptInvite(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: AcceptInviteInput!
+  ): AcceptInvitePayload
   authenticate(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1047,12 +1079,6 @@ type Mutation {
     """
     input: CreateInviteByEmailInput!
   ): CreateInviteByEmailPayload
-  updateNewUserOnInviteAccept(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateNewUserOnInviteAcceptInput!
-  ): UpdateNewUserOnInviteAcceptPayload
   updateUserInfo(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -1629,39 +1655,6 @@ type UpdateMessagePayload {
   ): MessagesEdge
 }
 
-"""All input for the `updateNewUserOnInviteAccept` mutation."""
-input UpdateNewUserOnInviteAcceptInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  userId: UUID!
-  newName: String!
-  newPassword: String!
-}
-
-"""The output of our `updateNewUserOnInviteAccept` mutation."""
-type UpdateNewUserOnInviteAcceptPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-  user: User
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-
-  """An edge for our `User`. May be used by Relay 1."""
-  userEdge(
-    """The method to use when ordering `User`."""
-    orderBy: [UsersOrderBy!] = [PRIMARY_KEY_ASC]
-  ): UsersEdge
-}
-
 """All input for the `updateRoomByNodeId` mutation."""
 input UpdateRoomByNodeIdInput {
   """
@@ -2103,8 +2096,8 @@ type UsersInRoom implements Node {
   """
   nodeId: ID!
   id: UUID!
-  roomId: UUID
-  userId: UUID
+  roomId: UUID!
+  userId: UUID!
   dateJoined: Datetime
 
   """Reads a single `Room` that is related to this `UsersInRoom`."""
@@ -2135,8 +2128,8 @@ input UsersInRoomCondition {
 """An input for mutations affecting `UsersInRoom`"""
 input UsersInRoomInput {
   id: UUID
-  roomId: UUID
-  userId: UUID
+  roomId: UUID!
+  userId: UUID!
   dateJoined: Datetime
 }
 

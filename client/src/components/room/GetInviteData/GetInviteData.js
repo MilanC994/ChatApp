@@ -2,7 +2,7 @@ import React from 'react'
 import { QueryRenderer } from 'react-relay'
 import graphql from 'babel-plugin-relay/macro'
 import environment from '../../../Environment'
-import AcceptInvite from '../AcceptInvite/AcceptInvite'
+import AnswerInvite from '../AnswerInvite/AnswerInvite'
 import Navbar from '../../nav/Navbar/Navbar'
 
 const getInviteDataQuery = graphql`
@@ -45,7 +45,7 @@ const GetInviteData = (props) => {
           return (
             <React.Fragment>
               <Navbar currentProfile={props.currentProfile} />
-              <AcceptInvite
+              <AnswerInvite
                 invite={props.invite}
                 currentProfile={props.currentProfile}
               />

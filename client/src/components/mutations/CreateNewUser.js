@@ -11,16 +11,18 @@ const mutation = graphql`
   }
 `
 
-export default (name, email, password, callback) => {
+export default (name, email, password, inviteId, callback) => {
   
   const variables = {
     input: {
-      emailinp: email,
-      passwordinp: password,
-      nameinp: name,
+      _email: email,
+      _password: password,
+      _name: name,
+      _inviteId: inviteId || null
+
     },
   }
-
+  console.log(variables, "VARIJABLE")
   commitMutation(environment, {
     mutation,
     variables,

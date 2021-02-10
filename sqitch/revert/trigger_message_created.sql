@@ -2,6 +2,6 @@
 
 BEGIN;
 
--- XXX Add DDLs here.
+DROP TRIGGER _message_gql_create ON chatapp.message;
 
 COMMIT;

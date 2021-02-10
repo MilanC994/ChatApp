@@ -21,7 +21,6 @@ const Invite = ({room, classes, invitedUsers}) => {
   })
 
   const { invites } = invitedUsers
-  console.log(invites, " INVAJTS")
   const handleCreateInviteByEmail = () => {
     const { email } = state
     if (emailValidation(email)) {

@@ -8,8 +8,8 @@ BEGIN;
 
 CREATE TABLE chatapp.users_in_rooms (
     id   uuid PRIMARY KEY DEFAULT uuid_generate_v4 () ,
-    room_id uuid references chatapp.room(id),
-    user_id uuid references chatapp.users(id),
+    room_id uuid references chatapp.room(id) not null,
+    user_id uuid references chatapp.users(id) not null,
     date_joined TIMESTAMP DEFAULT now()::TIMESTAMP
 );
 

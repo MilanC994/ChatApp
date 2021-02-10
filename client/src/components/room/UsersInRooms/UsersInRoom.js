@@ -23,10 +23,6 @@ class UsersInRoom extends Component {
   render() {
     const { classes } = this.props
     const { usersInRooms } = this.props.users
-
-    const handleCreateInviteByEmail = () => {
-      //CreateInviteByEmailMutation(email,roomId)
-    }
     return (
       <React.Fragment>
         <Box className={classes.headerBox}>
@@ -39,14 +35,7 @@ class UsersInRoom extends Component {
             id='standard-basic'
             label='Input User Email'
           />
-          <Button
-            onClick={() => handleCreateInviteByEmail()}
-            variant='contained'
-            color='primary'
-            className={classes.searchBtn}
-          >
-            Search User
-          </Button>{' '}
+  
         </Box>
         <Divider />
         <span>Users in Room</span>

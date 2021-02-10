@@ -18,16 +18,16 @@ import SignInStyle from './SignInStyle'
 import useSignIn from './useSignIn'
 
 
-const SignIn = ({ classes }) => {
+const SignIn = ({ classes, inviteId, inviteEmail }) => {
 
-  const { emailField: email, passwordField: password, handleSubmit, error, signedIn } = useSignIn()
+  const { emailField: email, passwordField: password, handleSubmit, error, signedIn } = useSignIn({ inviteId, inviteEmail })
  
     if (signedIn) {
       return <Redirect to={'/dashboard'} />
     }
     return (
       <React.Fragment>
-        <Navbar />
+        {!inviteId && <Navbar />}
         <Container component='main' maxWidth='xs'>
           <CssBaseline />
           <div className={classes.paper}>
@@ -45,13 +45,11 @@ const SignIn = ({ classes }) => {
                 fullWidth
                 id='email'
                 label='Email Address'
-                // name='email'
                 autoComplete='email'
                 autoFocus
-                // value={state.email}
-                // onChange={handleChange}
                 {...email}
                 error={!!email.error}
+                disabled={!!inviteEmail}
               />
               {!!email.error &&<Alert severity="error">{email.error}</Alert>}
               <TextField

@@ -10,8 +10,9 @@
 import type { ConcreteRequest } from 'relay-runtime';
 export type AuthenticateInput = {|
   clientMutationId?: ?string,
-  email: string,
-  password: string,
+  email?: ?string,
+  password?: ?string,
+  _inviteId?: ?any,
 |};
 export type SignUserInMutationVariables = {|
   input: AuthenticateInput

@@ -4,53 +4,21 @@ import environment from '../../Environment'
 
 // 2
 const mutation = graphql`
-  mutation AcceptInviteMutation($input: UpdateInviteInput!, $roomId: UUID!) {
-    updateInvite(input: $input) {
-      query {
-        room(id: $roomId) {
-          id
-          name
-          createdAt
-          public
-          user {
-            id
-            name
-            email
-          }
-          usersInRooms {
-            edges {
-              node {
-                id
-                user {
-                  id
-                  name
-                  email
-                }
-                room {
-                  id
-                  name
-                  createdAt
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+mutation AcceptInviteMutation($input: AcceptInviteInput!) {
+  acceptInvite(input: $input) {
+  clientMutationId
   }
+  
+}
 `
 
 // 3
-export default (id, roomId, userId, callback) => {
+export default (inviteId, callback) => {
   // 4
   const variables = {
     input: {
-      id,
-      patch: {
-        accepted: true,
-      },
-    },
-    roomId,
+      _inviteId: inviteId
+    }
   }
 
   // 5
@@ -62,6 +30,9 @@ export default (id, roomId, userId, callback) => {
     onCompleted: (response, errors) => {
       if (errors) {
         callback(errors[0].message)
+      }
+      else{
+        callback(null)
       }
     },
 

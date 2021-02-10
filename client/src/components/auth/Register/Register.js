@@ -17,21 +17,21 @@ import { Alert } from '@material-ui/lab'
 import RegisterStyle from './RegisterStyle'
 import useRegister from './useRregister'
 
-const Register = ({ classes }) => {
-  
+const Register = ({ classes, inviteId, inviteEmail }) => {
     const { nameField:name,
       emailField: email,
       passwordField:password,
       retypePasswordField: retypePassword,
       handleSubmit, 
-      error, 
-      signedIn } = useRegister()
+      error
+     } = useRegister({ inviteId, inviteEmail })
     if (localStorage.getItem('token')) {
       return <Redirect to='/dashboard' />
     }
+
     return (
       <React.Fragment>
-        <Navbar />
+        {!inviteId && <Navbar />}
         <Container component='main' maxWidth='xs'>
           <CssBaseline />
           <div className={classes.paper}>
@@ -66,6 +66,7 @@ const Register = ({ classes }) => {
                 autoFocus
                 {...email}
                 error={!!email.error}
+                disabled={!!inviteEmail}
               />
               {!!email.error &&<Alert severity="error">{email.error}</Alert>}
               <TextField
