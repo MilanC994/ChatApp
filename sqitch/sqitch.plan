@@ -17,7 +17,6 @@ function_create_encrypted_user [appschema table_users table_invite] 2020-06-04T1
 function_current_profile [appschema table_users type_jwt_token] 2020-06-04T13:57:18Z postgres <postgres@test.com> # Get current user profile from jwt
 roomOrderBy [appschema] 2020-06-10T10:26:23Z postgres <postgres@test.com> # Enum type for order by clause.
 function_create_invite_by_email [appschema table_users table_room table_invite] 2020-06-17T14:30:59Z postgres <postgres@test.com> # Create User if not exists on invite send.
-function_check_if_user_is_in_room_before_invite [appschema table_room table_users_in_rooms table_users] 2020-06-25T14:43:23Z postgres <postgres@test.com> # Before insert in invite, check if user is already in the room.
 function_update_user_info [appschema table_users] 2020-06-26T14:55:24Z postgres <postgres@test.com> # Update user info
 function_all_rooms [appschema table_users table_room] 2020-07-02T09:51:31Z postgres <postgres@test.com> # Get user public rooms
 check_if_user_can_send_messsage_trigger [appschema table_users table_room] 2020-07-02T12:00:27Z postgres <postgres@test.com> # Check if user can send message trigger

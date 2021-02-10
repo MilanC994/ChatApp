@@ -14,7 +14,8 @@ CREATE TABLE chatapp.invite (
     created_at TIMESTAMP DEFAULT now()::TIMESTAMP,
     expiration_time TIMESTAMP default ((now()::timestamp) + interval '24 hour'),
     email  VARCHAR(255),
-    UNIQUE (room_id, user_id)
+    unique (room_id, user_id),
+    unique (room_id, email)
 );
 
 CREATE INDEX invite_user_id_index 

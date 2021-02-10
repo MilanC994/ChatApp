@@ -11,6 +11,7 @@ import graphql from 'babel-plugin-relay/macro'
 import CreateInviteByEmail from '../../mutations/CreateInviteByEmail'
 import { emailValidation } from '../../../utils/credentialsValidation'
 import InviteStyle from './InviteStyle'
+import { Alert } from '@material-ui/lab'
 
 
 const Invite = ({room, classes, invitedUsers}) => {
@@ -25,9 +26,9 @@ const Invite = ({room, classes, invitedUsers}) => {
     const { email } = state
     if (emailValidation(email)) {
       CreateInviteByEmail(email, room.id, (er) => {
+        console.log("LOGUJEM    ", er)
         setState({ ...state, error: er })
       })
-      setState({ ...state, email: '', error: null })
     } else {
       setState({ ...state, error: 'Invalid email' })
     }
@@ -53,9 +54,9 @@ const Invite = ({room, classes, invitedUsers}) => {
           Send Invite
         </Button>{' '}
       </Box>
-      {state.error ? (
-        <Box className={classes.errorDiv}>{state.error}</Box>
-      ) : null}
+      {state.error && 
+        <Alert severity="error">{state.error}</Alert>
+      }
       <Divider />
 
       <span>Invited Users</span>

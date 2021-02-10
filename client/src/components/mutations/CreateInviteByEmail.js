@@ -35,7 +35,9 @@ import {
     ConnectionHandler.insertEdgeBefore(conn, newEdge)
   }
   const errors = {
-    'duplicate key value violates unique constraint "invite_user_id_room_id_key"': "Already Exists"
+    'duplicate key value violates unique constraint "invite_user_id_room_id_key"': "Already Exists",
+    'Can not add yourself': "Can not add yourself",
+    'duplicate key value violates unique constraint "invite_room_id_email_key"': 'Invite already sent'
   }
   
   // 3
@@ -45,7 +47,7 @@ import {
       input: {
         emailinp:email,
         roomid:roomId
-    }
+      }
     }
   
     // 5
@@ -109,11 +111,11 @@ import {
       },
       onCompleted: (response, error) => {
         if(error){
-          console.log(error)
+          console.log(error[0].message)
           callback(errors[error[0].message])
         }
       },
-      onError: err => {callback(err)},
+      onError: err => {callback(err.message)},
       },
     )
   }
