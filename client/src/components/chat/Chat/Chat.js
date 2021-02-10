@@ -14,11 +14,16 @@ import useChat from './useChat'
 
 const Chat = ({ userId, roomId, messages, classes }) => {
 
-  const { state, handleContentChange,createMessage, bottomRef } = useChat({
-                                                                        userId,
-                                                                        roomId,
-                                                                        messages: messages.messages.edges  
-                                                                      })
+  const { 
+    state,
+    handleContentChange,
+    createMessage, 
+    bottomRef } =
+     useChat({
+              userId,
+              roomId,
+              messages: messages.messages.edges  
+            })
   const { content, messageError } = state
 
 
