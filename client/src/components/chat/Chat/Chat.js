@@ -13,8 +13,14 @@ import ChatStyle from './ChatStyle'
 import useChat from './useChat'
 
 const Chat = ({ userId, roomId, messages, classes }) => {
-  const { state, handleContentChange,createMessage } = useChat({ userId, roomId })
+
+  const { state, handleContentChange,createMessage, bottomRef } = useChat({
+                                                                        userId,
+                                                                        roomId,
+                                                                        messages: messages.messages.edges  
+                                                                      })
   const { content, messageError } = state
+
 
   return (
     <div>
@@ -29,6 +35,7 @@ const Chat = ({ userId, roomId, messages, classes }) => {
               />
             ))}
             {messageError}
+            <div ref={bottomRef} className="list-bottom"></div>
           </List>
           <Divider />
           <Grid container style={{ padding: '20px' }}>
@@ -45,7 +52,7 @@ const Chat = ({ userId, roomId, messages, classes }) => {
               <Fab
                 color='primary'
                 aria-label='add'
-                onClick={() => createMessage()}
+                onClick={createMessage}
               >
                 <SendIcon />
               </Fab>

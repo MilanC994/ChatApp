@@ -1,8 +1,18 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import CreateMessageMutation from '../../mutations/CreateMessage'
 import NewMessageSubscription from '../../../subscriptions/NewMessage'
 
-const useChat = ({userId, roomId}) => {
+const useChat = ({ userId, roomId, messages }) => {
+  useEffect(() => {
+    scrollToBottom()
+}, [messages])
+
+useEffect(() => {
+    scrollToBottom()
+}, [])
+
+
+
     const [state, setState] = useState({
         content: '',
         messageError: null,
@@ -11,6 +21,16 @@ const useChat = ({userId, roomId}) => {
     useEffect(() => {
       NewMessageSubscription(roomId, userId)
     }, [])
+
+    
+  const bottomRef = useRef()
+
+  const scrollToBottom = () => {
+    bottomRef.current.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+    });
+};
 
     const handleContentChange = useCallback(e => {
         setState({...state, content: e.target.value})
@@ -21,9 +41,9 @@ const useChat = ({userId, roomId}) => {
         if (messageError) setState({ ...state, messageError })
       })
       setState({ ...state, content: '' })
-     },
+     },[state]
     )
-    return { state, handleContentChange,createMessage }
+    return { state, handleContentChange,createMessage, bottomRef }
 }
 
 export default useChat
