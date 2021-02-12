@@ -34,7 +34,7 @@ query DashboardQuery {
 }
 
 fragment AllRoomsContainer_allRooms on User {
-  allRooms(first: 5, _admin: true, _joined: true, _invite: true, _publicOnly: true, _searchTerm: "sanja") {
+  allRooms(first: 5, _admin: true, _joined: true, _invite: true, _publicOnly: true, _searchTerm: "") {
     edges {
       cursor
       node {
@@ -148,7 +148,7 @@ v2 = [
   {
     "kind": "Literal",
     "name": "_searchTerm",
-    "value": "sanja"
+    "value": ""
   },
   {
     "kind": "Literal",
@@ -476,7 +476,7 @@ return {
                 "storageKey": null
               }
             ],
-            "storageKey": "allRooms(_admin:true,_invite:true,_joined:true,_publicOnly:true,_searchTerm:\"sanja\",first:5)"
+            "storageKey": "allRooms(_admin:true,_invite:true,_joined:true,_publicOnly:true,_searchTerm:\"\",first:5)"
           },
           {
             "alias": null,
@@ -497,7 +497,7 @@ return {
     "metadata": {},
     "name": "DashboardQuery",
     "operationKind": "query",
-    "text": "query DashboardQuery {\n  currentProfile {\n    id\n    name\n    ...AllRoomsContainer_allRooms\n  }\n}\n\nfragment AllRoomsContainer_allRooms on User {\n  allRooms(first: 5, _admin: true, _joined: true, _invite: true, _publicOnly: true, _searchTerm: \"sanja\") {\n    edges {\n      cursor\n      node {\n        ...RoomCard_room\n        __typename\n      }\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n\nfragment Invite_invitedUsers on Room {\n  invites(condition: {accepted: false}, first: 100) {\n    edges {\n      node {\n        id\n        email\n        createdAt\n        expirationTime\n        roomId\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment RoomCard_room on Room {\n  id\n  name\n  public\n  user {\n    id\n    name\n  }\n  createdAt\n  ...Invite_invitedUsers\n  ...UsersInRoom_users\n}\n\nfragment User_UserInfo on User {\n  id\n  name\n  email\n}\n\nfragment UsersInRoom_users on Room {\n  usersInRooms(orderBy: DATE_JOINED_DESC, first: 100) {\n    edges {\n      node {\n        id\n        user {\n          ...User_UserInfo\n        }\n        dateJoined\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
+    "text": "query DashboardQuery {\n  currentProfile {\n    id\n    name\n    ...AllRoomsContainer_allRooms\n  }\n}\n\nfragment AllRoomsContainer_allRooms on User {\n  allRooms(first: 5, _admin: true, _joined: true, _invite: true, _publicOnly: true, _searchTerm: \"\") {\n    edges {\n      cursor\n      node {\n        ...RoomCard_room\n        __typename\n      }\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n\nfragment Invite_invitedUsers on Room {\n  invites(condition: {accepted: false}, first: 100) {\n    edges {\n      node {\n        id\n        email\n        createdAt\n        expirationTime\n        roomId\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment RoomCard_room on Room {\n  id\n  name\n  public\n  user {\n    id\n    name\n  }\n  createdAt\n  ...Invite_invitedUsers\n  ...UsersInRoom_users\n}\n\nfragment User_UserInfo on User {\n  id\n  name\n  email\n}\n\nfragment UsersInRoom_users on Room {\n  usersInRooms(orderBy: DATE_JOINED_DESC, first: 100) {\n    edges {\n      node {\n        id\n        user {\n          ...User_UserInfo\n        }\n        dateJoined\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
   }
 };
 })();

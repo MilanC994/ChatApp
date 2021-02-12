@@ -20,10 +20,10 @@ const roomQuery = graphql`
       id
       name
       usersInRooms {
-        ...UsersInChat_Users
+        ...UsersInChat_Users 
       }
 
-      ...Chat_messages
+      ...Chat_messages@arguments(id:$id)
     }
   }
 `

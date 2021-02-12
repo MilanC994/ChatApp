@@ -26,7 +26,6 @@ const Invite = ({room, classes, invitedUsers}) => {
     const { email } = state
     if (emailValidation(email)) {
       CreateInviteByEmail(email, room.id, (er) => {
-        console.log("LOGUJEM    ", er)
         setState({ ...state, error: er })
       })
     } else {

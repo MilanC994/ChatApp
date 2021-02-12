@@ -22,12 +22,10 @@ const useAnswerInvite = ({ invite, currentProfile }) => {
     }
       
     if (currentProfile) {
-      console.log("currentProfile ima")
       if( !invite.user || (currentProfile.id !== invite.user.id)){
           setState({ ...state, inviteError: 'This invite does not belong to you' })
       }
       else{
-        console.log("u elsu")
         setState({...state, userExists: true, logedIn: true })
       }
         

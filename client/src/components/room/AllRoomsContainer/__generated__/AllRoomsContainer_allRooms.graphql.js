@@ -69,7 +69,7 @@ const node/*: ReaderFragment*/ = {
       "type": "Boolean"
     },
     {
-      "defaultValue": "sanja",
+      "defaultValue": "",
       "kind": "LocalArgument",
       "name": "searchTerm",
       "type": "String"
@@ -183,6 +183,6 @@ const node/*: ReaderFragment*/ = {
   "type": "User"
 };
 // prettier-ignore
-(node/*: any*/).hash = '74adb90fb4f0c0f5ede0a7e8a843d727';
+(node/*: any*/).hash = 'f39be73a518ff103dd2e652d0e15e94d';
 
 module.exports = node;

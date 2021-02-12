@@ -18,12 +18,16 @@ const useInputField = (name, defaultValue, validateFn) => {
         setError(null)
     },[])
 
+    const resetValue = useCallback(() => {
+        setInputValue('')
+        setError(null)
+    },[]) 
     const input = useMemo(() => { 
         return { name, error, value, onChange }
-    }, [name, error, value, onChange, validateInput])
+    }, [name, error, value, onChange, validateInput, resetValue])
     const data = useMemo(() => { 
-        return { name, value, validate: validateInput }
-    }, [name, error, value, onChange, validateInput])
+        return { name, value, validate: validateInput, reset: resetValue }
+    }, [name, error, value, onChange, validateInput, resetValue])
     
     return { input, data }
 }

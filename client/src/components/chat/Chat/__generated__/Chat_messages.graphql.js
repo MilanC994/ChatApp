@@ -15,11 +15,16 @@ declare export opaque type Chat_messages$fragmentType: Chat_messages$ref;
 export type Chat_messages = {|
   +messages: {|
     +edges: $ReadOnlyArray<{|
+      +cursor: ?any,
       +node: ?{|
         +id: any,
         +$fragmentRefs: Message_UserMessage$ref,
-      |}
-    |}>
+      |},
+    |}>,
+    +pageInfo: {|
+      +startCursor: ?any,
+      +hasPreviousPage: boolean,
+    |},
   |},
   +$refType: Chat_messages$ref,
 |};
@@ -33,14 +38,39 @@ export type Chat_messages$key = {
 
 
 const node/*: ReaderFragment*/ = {
-  "argumentDefinitions": [],
+  "argumentDefinitions": [
+    {
+      "defaultValue": 10,
+      "kind": "LocalArgument",
+      "name": "count",
+      "type": "Int"
+    },
+    {
+      "defaultValue": null,
+      "kind": "LocalArgument",
+      "name": "cursor",
+      "type": "Cursor"
+    },
+    {
+      "defaultValue": "SENT_AT_ASC",
+      "kind": "LocalArgument",
+      "name": "orderBy",
+      "type": "MessagesOrderBy"
+    },
+    {
+      "defaultValue": null,
+      "kind": "LocalArgument",
+      "name": "id",
+      "type": "UUID"
+    }
+  ],
   "kind": "Fragment",
   "metadata": {
     "connection": [
       {
-        "count": null,
-        "cursor": null,
-        "direction": "forward",
+        "count": "count",
+        "cursor": "cursor",
+        "direction": "backward",
         "path": [
           "messages"
         ]
@@ -65,6 +95,13 @@ const node/*: ReaderFragment*/ = {
           "name": "edges",
           "plural": true,
           "selections": [
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "cursor",
+              "storageKey": null
+            },
             {
               "alias": null,
               "args": null,
@@ -94,13 +131,6 @@ const node/*: ReaderFragment*/ = {
                 }
               ],
               "storageKey": null
-            },
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "cursor",
-              "storageKey": null
             }
           ],
           "storageKey": null
@@ -117,14 +147,14 @@ const node/*: ReaderFragment*/ = {
               "alias": null,
               "args": null,
               "kind": "ScalarField",
-              "name": "endCursor",
+              "name": "startCursor",
               "storageKey": null
             },
             {
               "alias": null,
               "args": null,
               "kind": "ScalarField",
-              "name": "hasNextPage",
+              "name": "hasPreviousPage",
               "storageKey": null
             }
           ],
@@ -137,6 +167,6 @@ const node/*: ReaderFragment*/ = {
   "type": "Room"
 };
 // prettier-ignore
-(node/*: any*/).hash = 'ea06e99713b689fd64464b293861b388';
+(node/*: any*/).hash = '9645be38e6364fce67c20ee92a1371b9';
 
 module.exports = node;

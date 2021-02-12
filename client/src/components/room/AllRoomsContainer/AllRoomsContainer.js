@@ -247,7 +247,7 @@ export default createRefetchContainer(AllRoomsContainer, {
      public:{ type:"Boolean"},
      invite:{ type:"Boolean", defaultValue: true },
      publicOnly:{ type:"Boolean", defaultValue:true }
-     searchTerm:{ type:"String", defaultValue: "sanja" },
+     searchTerm:{ type:"String", defaultValue: "" },
      count:{type:"Int", defaultValue:5},
      cursor:{type:"Cursor"}
   )

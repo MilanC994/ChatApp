@@ -22,7 +22,6 @@ export default (name, email, password, inviteId, callback) => {
 
     },
   }
-  console.log(variables, "VARIJABLE")
   commitMutation(environment, {
     mutation,
     variables,

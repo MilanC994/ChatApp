@@ -22,7 +22,6 @@ import graphql from 'babel-plugin-relay/macro'
       _inviteId: inviteId || null
       }
     }
-    console.log("SIGN IN VARIABLES, ", variables)
     commitMutation(
       environment,
       {

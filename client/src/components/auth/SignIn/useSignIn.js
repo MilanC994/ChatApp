@@ -22,8 +22,8 @@ const useSignIn = ({ inviteId, inviteEmail }) => {
     const { input: passwordField, data: password} = useInputField('password','', passwordValidation)
 
     const handleSubmit = useCallback(async () => {
-        console.log("HANDLE SUBMIT")
-        if(!validateForm([email, password])){ console.log("validation res   je false"); return}
+        if(!validateForm([email, password]))
+            return
         SignUserIn(
             emailField.value,
             passwordField.value,

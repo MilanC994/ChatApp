@@ -10,14 +10,14 @@
 import type { ConcreteRequest } from 'relay-runtime';
 type Chat_messages$ref = any;
 type UsersInChat_Users$ref = any;
-export type ChatRoomQueryVariables = {|
-  id: any
+export type MessagesOrderBy = "CONTENT_ASC" | "CONTENT_DESC" | "ID_ASC" | "ID_DESC" | "NATURAL" | "PRIMARY_KEY_ASC" | "PRIMARY_KEY_DESC" | "ROOM_ID_ASC" | "ROOM_ID_DESC" | "SENT_AT_ASC" | "SENT_AT_DESC" | "USER_ID_ASC" | "USER_ID_DESC" | "%future added value";
+export type ChatQueryVariables = {|
+  count: number,
+  cursor: any,
+  orderBy: MessagesOrderBy,
+  id: any,
 |};
-export type ChatRoomQueryResponse = {|
-  +currentProfile: ?{|
-    +id: any,
-    +name: string,
-  |},
+export type ChatQueryResponse = {|
   +room: ?{|
     +id: any,
     +name: string,
@@ -25,35 +25,33 @@ export type ChatRoomQueryResponse = {|
       +$fragmentRefs: UsersInChat_Users$ref
     |},
     +$fragmentRefs: Chat_messages$ref,
-  |},
+  |}
 |};
-export type ChatRoomQuery = {|
-  variables: ChatRoomQueryVariables,
-  response: ChatRoomQueryResponse,
+export type ChatQuery = {|
+  variables: ChatQueryVariables,
+  response: ChatQueryResponse,
 |};
 */
 
 
 /*
-query ChatRoomQuery(
+query ChatQuery(
+  $count: Int!
+  $cursor: Cursor!
   $id: UUID!
 ) {
-  currentProfile {
-    id
-    name
-  }
   room(id: $id) {
     id
     name
     usersInRooms {
       ...UsersInChat_Users
     }
-    ...Chat_messages_1Bmzm5
+    ...Chat_messages_32czeo
   }
 }
 
-fragment Chat_messages_1Bmzm5 on Room {
-  messages(orderBy: SENT_AT_ASC, last: 10) {
+fragment Chat_messages_32czeo on Room {
+  messages(orderBy: SENT_AT_ASC, last: $count, before: $cursor) {
     edges {
       cursor
       node {
@@ -101,50 +99,59 @@ var v0 = [
   {
     "defaultValue": null,
     "kind": "LocalArgument",
+    "name": "count",
+    "type": "Int!"
+  },
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "cursor",
+    "type": "Cursor!"
+  },
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "orderBy",
+    "type": "MessagesOrderBy!"
+  },
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
     "name": "id",
     "type": "UUID!"
   }
 ],
-v1 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "id",
-  "storageKey": null
-},
-v2 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "name",
-  "storageKey": null
-},
-v3 = [
-  (v1/*: any*/),
-  (v2/*: any*/)
-],
-v4 = {
-  "alias": null,
-  "args": null,
-  "concreteType": "User",
-  "kind": "LinkedField",
-  "name": "currentProfile",
-  "plural": false,
-  "selections": (v3/*: any*/),
-  "storageKey": null
-},
-v5 = [
+v1 = [
   {
     "kind": "Variable",
     "name": "id",
     "variableName": "id"
   }
 ],
-v6 = [
+v2 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "id",
+  "storageKey": null
+},
+v3 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "name",
+  "storageKey": null
+},
+v4 = [
   {
-    "kind": "Literal",
+    "kind": "Variable",
+    "name": "before",
+    "variableName": "cursor"
+  },
+  {
+    "kind": "Variable",
     "name": "last",
-    "value": 10
+    "variableName": "count"
   },
   {
     "kind": "Literal",
@@ -157,19 +164,18 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "ChatRoomQuery",
+    "name": "ChatQuery",
     "selections": [
-      (v4/*: any*/),
       {
         "alias": null,
-        "args": (v5/*: any*/),
+        "args": (v1/*: any*/),
         "concreteType": "Room",
         "kind": "LinkedField",
         "name": "room",
         "plural": false,
         "selections": [
-          (v1/*: any*/),
           (v2/*: any*/),
+          (v3/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -187,7 +193,23 @@ return {
             "storageKey": null
           },
           {
-            "args": (v5/*: any*/),
+            "args": [
+              {
+                "kind": "Variable",
+                "name": "count",
+                "variableName": "count"
+              },
+              {
+                "kind": "Variable",
+                "name": "cursor",
+                "variableName": "cursor"
+              },
+              {
+                "kind": "Variable",
+                "name": "orderBy",
+                "variableName": "orderBy"
+              }
+            ],
             "kind": "FragmentSpread",
             "name": "Chat_messages"
           }
@@ -201,19 +223,18 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "ChatRoomQuery",
+    "name": "ChatQuery",
     "selections": [
-      (v4/*: any*/),
       {
         "alias": null,
-        "args": (v5/*: any*/),
+        "args": (v1/*: any*/),
         "concreteType": "Room",
         "kind": "LinkedField",
         "name": "room",
         "plural": false,
         "selections": [
-          (v1/*: any*/),
           (v2/*: any*/),
+          (v3/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -230,7 +251,7 @@ return {
                 "name": "nodes",
                 "plural": true,
                 "selections": [
-                  (v1/*: any*/),
+                  (v2/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -239,8 +260,8 @@ return {
                     "name": "user",
                     "plural": false,
                     "selections": [
-                      (v1/*: any*/),
                       (v2/*: any*/),
+                      (v3/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -266,7 +287,7 @@ return {
           },
           {
             "alias": null,
-            "args": (v6/*: any*/),
+            "args": (v4/*: any*/),
             "concreteType": "MessagesConnection",
             "kind": "LinkedField",
             "name": "messages",
@@ -295,7 +316,7 @@ return {
                     "name": "node",
                     "plural": false,
                     "selections": [
-                      (v1/*: any*/),
+                      (v2/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -303,7 +324,10 @@ return {
                         "kind": "LinkedField",
                         "name": "user",
                         "plural": false,
-                        "selections": (v3/*: any*/),
+                        "selections": [
+                          (v2/*: any*/),
+                          (v3/*: any*/)
+                        ],
                         "storageKey": null
                       },
                       {
@@ -366,11 +390,11 @@ return {
                 "storageKey": null
               }
             ],
-            "storageKey": "messages(last:10,orderBy:\"SENT_AT_ASC\")"
+            "storageKey": null
           },
           {
             "alias": null,
-            "args": (v6/*: any*/),
+            "args": (v4/*: any*/),
             "filters": [],
             "handle": "connection",
             "key": "all_messages_in_room_messages",
@@ -385,13 +409,13 @@ return {
   "params": {
     "id": null,
     "metadata": {},
-    "name": "ChatRoomQuery",
+    "name": "ChatQuery",
     "operationKind": "query",
-    "text": "query ChatRoomQuery(\n  $id: UUID!\n) {\n  currentProfile {\n    id\n    name\n  }\n  room(id: $id) {\n    id\n    name\n    usersInRooms {\n      ...UsersInChat_Users\n    }\n    ...Chat_messages_1Bmzm5\n  }\n}\n\nfragment Chat_messages_1Bmzm5 on Room {\n  messages(orderBy: SENT_AT_ASC, last: 10) {\n    edges {\n      cursor\n      node {\n        id\n        ...Message_UserMessage\n        __typename\n      }\n    }\n    pageInfo {\n      startCursor\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Message_UserMessage on Message {\n  user {\n    id\n    name\n  }\n  userId\n  content\n  sentAt\n}\n\nfragment User_UserInfo on User {\n  id\n  name\n  email\n}\n\nfragment UsersInChat_Users on UsersInRoomsConnection {\n  nodes {\n    id\n    user {\n      ...User_UserInfo\n    }\n    dateJoined\n  }\n}\n"
+    "text": "query ChatQuery(\n  $count: Int!\n  $cursor: Cursor!\n  $id: UUID!\n) {\n  room(id: $id) {\n    id\n    name\n    usersInRooms {\n      ...UsersInChat_Users\n    }\n    ...Chat_messages_32czeo\n  }\n}\n\nfragment Chat_messages_32czeo on Room {\n  messages(orderBy: SENT_AT_ASC, last: $count, before: $cursor) {\n    edges {\n      cursor\n      node {\n        id\n        ...Message_UserMessage\n        __typename\n      }\n    }\n    pageInfo {\n      startCursor\n      hasPreviousPage\n    }\n  }\n}\n\nfragment Message_UserMessage on Message {\n  user {\n    id\n    name\n  }\n  userId\n  content\n  sentAt\n}\n\nfragment User_UserInfo on User {\n  id\n  name\n  email\n}\n\nfragment UsersInChat_Users on UsersInRoomsConnection {\n  nodes {\n    id\n    user {\n      ...User_UserInfo\n    }\n    dateJoined\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '7e9894cbcde1724de4986d87c86042b1';
+(node/*: any*/).hash = '2bc5fa26e698ab2fdfc6412e824c75e9';
 
 module.exports = node;

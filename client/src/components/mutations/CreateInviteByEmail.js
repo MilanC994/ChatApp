@@ -111,7 +111,6 @@ import {
       },
       onCompleted: (response, error) => {
         if(error){
-          console.log(error[0].message)
           callback(errors[error[0].message])
         }
       },

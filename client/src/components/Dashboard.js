@@ -40,7 +40,6 @@ function Dashboard() {
             <Link to='/login'><Button variant="contained" color="primary" onClick={releaseToken}>Go Back</Button></Link>
           </Container>)
         } else if (props) {
-          console.log("LOGUJEM PROSLO DALJE", props)
           return (
             <React.Fragment>
               <Navbar  currentProfile={props.currentProfile} />
