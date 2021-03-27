@@ -1,8 +1,8 @@
 // 1
-import { commitMutation } from 'react-relay'
-import graphql from 'babel-plugin-relay/macro'
-import environment from '../../Environment'
-import { ConnectionHandler } from 'relay-runtime'
+import { commitMutation } from "react-relay"
+import graphql from "babel-plugin-relay/macro"
+import environment from "../../Environment"
+import { ConnectionHandler } from "relay-runtime"
 
 // 2
 const mutation = graphql`
@@ -19,32 +19,31 @@ const mutation = graphql`
   }
 `
 function sharedUpdater(store) {
-  const payload = store.getRootField('updateUserInfo')
+  const payload = store.getRootField("updateUserInfo")
   if (payload) {
-    const query = payload.getLinkedRecord('query')
-    const currentProfile = query.getLinkedRecord('currentProfile')
-
+    const query = payload.getLinkedRecord("query")
+    const currentProfile = query.getLinkedRecord("currentProfile")
 
     ConnectionHandler.update(store, currentProfile)
   }
 }
 
 // 3
-export default (
+export default ({
   _userId,
   currentPassword,
-  newName,
-  newEmail,
-  newPassword,
-  callback
-) => {
+  name,
+  email,
+  password,
+  callback,
+}) => {
   // 4
   const variables = {
     input: {
       _userId,
-      newName,
-      newEmail: newEmail || null,
-      newPassword: newPassword || null,
+      newName: name,
+      newEmail: email,
+      newPassword: password || null,
       currentPassword,
     },
   }
@@ -53,16 +52,15 @@ export default (
   commitMutation(environment, {
     mutation,
     variables,
-    updater: async (proxyStore) => {
+    updater: async proxyStore => {
       sharedUpdater(proxyStore)
     },
 
     onCompleted: (resp, errors) => {
       if (errors) {
         callback(errors[0].message)
-      }
-      else{
-        callback(null, 'User Successfully updated')
+      } else {
+        callback(null, "User Successfully updated")
       }
     },
     onError: err => {
